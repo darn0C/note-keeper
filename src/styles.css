@@ -6,8 +6,25 @@ body {
     word-wrap: break-word;
 }
 
+hr {
+    width: 85%;
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
+
 .taskTable {
     width: 30vw;
     height: 100%;
     display: inline-block;
+}
+
+.noteHeader {
+    padding-top: 8px;
+    margin-bottom: 8px;
+}
+
+.noteBody {
+    margin-top: 12px;
+    padding-bottom: 12px;
 }
