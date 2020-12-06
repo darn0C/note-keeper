@@ -1,7 +1,13 @@
 body {
-    background-color: #222831;
+    background-color: #646464;
     color: #f8f7de;
     font-family: Roboto;
     text-align: center;
     word-wrap: break-word;
+}
+
+.taskTable {
+    width: 30vw;
+    height: 100%;
+    display: inline-block;
 }
