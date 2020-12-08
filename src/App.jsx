@@ -20,16 +20,16 @@ export default function App() {
             <div>
                 <Header MenuHandling={handleMenu}/>
                 <Grid container direction="row" justify="space-evenly" alignItems="flex-start">
-                    <Grid class="taskTable">
+                    <Grid className="taskTable">
                         <Table tableName={"To - Do"} tableColor={"#14274e"} textColor={"#ebebeb"}/>
                         <h1>Todo</h1>
                         <Note/>
                     </Grid>
-                    <Grid class="taskTable">
+                    <Grid className="taskTable">
                         <Table tableName={"In Progress"} tableColor={"#d1c145"} textColor={"#222831"}/>
                         <h1>In Progress</h1>
                     </Grid>
-                    <Grid class="taskTable">
+                    <Grid className="taskTable">
                         <Table tableName={"Finished"} tableColor={"#54e346"} textColor={"#393e46"}/>
                         <h1>Finished</h1>
                     </Grid>

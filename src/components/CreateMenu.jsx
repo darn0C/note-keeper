@@ -4,13 +4,16 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Grid from "@material-ui/core/Grid";
 import TextField from '@material-ui/core/TextField';
 import AddIcon from '@material-ui/icons/Add';
+import axios from "axios";
 
 export default function CreateMenu(props) {
 
     const [task, setTask] = useState({title: "", description: ""})
 
     function handleChange(event) {
+
         const {name, value} = event.target
+
         setTask(prevValue => {
             if (name === "title") {
                 return {
@@ -26,9 +29,30 @@ export default function CreateMenu(props) {
         })
     }
 
-    function handleSubmit () {
+    function handleSubmit(event) {
+
+        event.preventDefault()
+
+        const data = {
+            title: task.title,
+            description: task.description
+        }
+
+        axios.post("http://localhost:4000/new", data)
+            .then(function (res) {
+                console.log(res)
+            })
+            .catch(function (err) {
+                console.log(err)
+            })
+
+        setTask({
+            title: "",
+            description: ""
+        })
 
     }
+
 
     return (
         <div>
@@ -43,7 +67,7 @@ export default function CreateMenu(props) {
                 <ArrowBackIcon/>
             </IconButton>
             <Grid style={{width: "75vw", margin: "72px auto 0 auto"}}>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <TextField
                         id="filled-basic"
                         label="Title"
