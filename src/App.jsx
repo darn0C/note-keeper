@@ -4,43 +4,43 @@ import Header from "./components/Header";
 import Grid from '@material-ui/core/Grid';
 import Table from "./components/Table";
 import Note from "./components/Note"
+import CreateMenu from "./components/CreateMenu";
 
 export default function App() {
 
-    const {toDoNotes, setToDoNotes} = useState([]);
-    const {inProgressNotes, setInProgressNotes} = useState([]);
-    const {finishedNotes, setFinishedNotes} = useState([]);
+    const {notes, setNotes} = useState([]);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    function updateToDoNotes () {
-        console.log(toDoNotes)
+    function handleMenu () {
+        setIsMenuOpen(!isMenuOpen)
     }
 
-    function updateInProgressNotes () {
-        console.log(inProgressNotes)
-    }
-
-    function updateFinishedNotes () {
-        console.log(finishedNotes)
-    }
-
-    return (
-        <div>
-            <Header/>
-            <Grid container direction="row" justify="space-evenly" alignItems="flex-start">
-                <Grid class="taskTable">
-                    <Table tableName={"To - Do"} tableColor={"#14274e"} textColor={"#ebebeb"}/>
-                    <h1>Todo</h1>
-                    <Note/>
-                </Grid >
-                <Grid class="taskTable">
-                    <Table tableName={"In Progress"} tableColor={"#d1c145"} textColor={"#222831"}/>
-                    <h1>In Progress</h1>
+    if (!isMenuOpen) {
+        return (
+            <div>
+                <Header MenuHandling={handleMenu}/>
+                <Grid container direction="row" justify="space-evenly" alignItems="flex-start">
+                    <Grid class="taskTable">
+                        <Table tableName={"To - Do"} tableColor={"#14274e"} textColor={"#ebebeb"}/>
+                        <h1>Todo</h1>
+                        <Note/>
+                    </Grid>
+                    <Grid class="taskTable">
+                        <Table tableName={"In Progress"} tableColor={"#d1c145"} textColor={"#222831"}/>
+                        <h1>In Progress</h1>
+                    </Grid>
+                    <Grid class="taskTable">
+                        <Table tableName={"Finished"} tableColor={"#54e346"} textColor={"#393e46"}/>
+                        <h1>Finished</h1>
+                    </Grid>
                 </Grid>
-                <Grid class="taskTable">
-                    <Table tableName={"Finished"} tableColor={"#54e346"} textColor={"#393e46"}/>
-                    <h1>Finished</h1>
-                </Grid>
-            </Grid>
-        </div>
-    )
+            </div>
+        )
+    } else if (isMenuOpen) {
+        return (
+            <div>
+                <CreateMenu MenuHandling={handleMenu}/>
+            </div>
+        )
+    }
 }
