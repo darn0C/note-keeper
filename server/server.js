@@ -33,7 +33,7 @@ const taskSchema = new mongoose.Schema({
         required: true,
         default: false
     },
-    done: {
+    finished: {
         type: Boolean,
         required: true,
         default: false

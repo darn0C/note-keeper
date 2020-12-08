@@ -1,5 +1,9 @@
 import React from "react";
 import Paper from '@material-ui/core/Paper';
+import IconButton from "@material-ui/core/IconButton";
+import ForwardIcon from '@material-ui/icons/Forward';
+import DoneIcon from '@material-ui/icons/Done';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export default function ToDoTask(props) {
     return (
@@ -8,6 +12,14 @@ export default function ToDoTask(props) {
                 <h2 className="noteHeader">{props.title}</h2>
                 <hr/>
                 <h3 className="noteBody">{props.description}</h3>
+                <IconButton style={{
+                    backgroundColor: "#222831",
+                    color: "#d1c145",
+                    marginRight: "8px"
+                }}><ForwardIcon/></IconButton>
+                <IconButton
+                    style={{backgroundColor: "#222831", color: "#54e346", marginRight: "8px"}}><DoneIcon/></IconButton>
+                <IconButton style={{backgroundColor: "#222831", color: "#bb2205"}}><DeleteIcon/></IconButton>
             </Paper>
         </div>
     )

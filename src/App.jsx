@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import Grid from '@material-ui/core/Grid';
 import Table from "./components/Table";
 import ToDoTask from "./components/notes/ToDoTask";
+import InProgressTask from "./components/notes/InProgressTask"
+import FinishedTask from "./components/notes/FinishedTask"
 import CreateMenu from "./components/CreateMenu";
 
 export default function App() {
@@ -44,11 +46,29 @@ export default function App() {
                     </Grid>
                     <Grid className="taskTable">
                         <Table tableName={"In Progress"} tableColor={"#d1c145"} textColor={"#222831"}/>
-                        <h1>In Progress</h1>
+                        {tasks.filter(item => item.inProgress === true).map((taskItem, index) => {
+                            return (
+                                <InProgressTask
+                                    key={index}
+                                    id={taskItem._id}
+                                    title={taskItem.title}
+                                    description={taskItem.description}
+                                />
+                            )
+                        })}
                     </Grid>
                     <Grid className="taskTable">
                         <Table tableName={"Finished"} tableColor={"#54e346"} textColor={"#393e46"}/>
-                        <h1>Finished</h1>
+                        {tasks.filter(item => item.finished === true).map((taskItem, index) => {
+                            return (
+                                <FinishedTask
+                                    key={index}
+                                    id={taskItem._id}
+                                    title={taskItem.title}
+                                    description={taskItem.description}
+                                />
+                            )
+                        })}
                     </Grid>
                 </Grid>
             </div>
