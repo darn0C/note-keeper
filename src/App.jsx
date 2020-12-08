@@ -12,18 +12,39 @@ import CreateMenu from "./components/CreateMenu";
 export default function App() {
 
     const [tasks, setTasks] = useState([]);
+
+    useEffect(() => {
+        const fetchTasks = async () => {
+            const res = await axios.get("http://localhost:4000/", {
+                Headers: {
+                    "Access-Control-Allow-Origin": "*"
+                }
+            });
+            setTasks(res.data)
+        };
+        fetchTasks()
+    }, []);
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     function handleMenu() {
         setIsMenuOpen(!isMenuOpen)
     }
 
-    useEffect(() => {
-        axios.get("http://localhost:4000/")
-            .then(function(res) {
-                setTasks(res.data)
-            })
-    })
+    const taskInProgress = async (id) => {
+        const res = await axios.post("http://localhost:4000/inProgressTask/" + id)
+        setTasks(res.data)
+    }
+
+    const taskFinished = async (id) => {
+        const res = await axios.post("http://localhost:4000/finishedTask/" + id)
+        setTasks(res.data)
+    }
+
+    const taskDeleted = async (id) => {
+        const res = await axios.post("http://localhost:4000/deletedTask/" + id)
+        setTasks(res.data)
+    }
 
     if (!isMenuOpen) {
         return (
@@ -32,7 +53,6 @@ export default function App() {
                 <Grid container direction="row" justify="space-evenly" alignItems="flex-start">
                     <Grid className="taskTable">
                         <Table tableName={"To - Do"} tableColor={"#14274e"} textColor={"#ebebeb"}/>
-                        <h1>Todo</h1>
                         {tasks.filter(item => item.toDo === true).map((taskItem, index) => {
                             return (
                                 <ToDoTask
@@ -40,6 +60,9 @@ export default function App() {
                                     id={taskItem._id}
                                     title={taskItem.title}
                                     description={taskItem.description}
+                                    onProgress={() => taskInProgress(taskItem._id)}
+                                    onFinish={() => taskFinished(taskItem._id)}
+                                    onDelete={() => taskDeleted(taskItem._id)}
                                 />
                             )
                         })}

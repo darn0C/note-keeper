@@ -55,7 +55,6 @@ app.get("/", function (req, res) {
             res.json(tasks)
         }
     })
-
 })
 
 app.post("/new", function (req, res) {
@@ -71,6 +70,45 @@ app.post("/new", function (req, res) {
         .catch((err) => {
             res.send(err)
         })
+})
+
+app.post("/inProgressTask/:id", async (req, res) => {
+    await Task.findByIdAndUpdate(req.params.id, {
+        toDo: false,
+        inProgress: true,
+        finished: false,
+        deleted: false,
+    });
+
+    const tasks = await Task.find();
+    res.json(tasks)
+
+})
+
+app.post("/doneTask/:id", async (req, res) => {
+    await Task.findByIdAndUpdate(req.params.id, {
+        toDo: false,
+        inProgress: false,
+        finished: true,
+        deleted: false,
+    });
+
+    const tasks = await Task.find();
+    res.json(tasks)
+
+})
+
+app.post("/deleteTask/:id", async (req, res) => {
+    await Task.findByIdAndUpdate(req.params.id, {
+        toDo: false,
+        inProgress: false,
+        finished: false,
+        deleted: true,
+    });
+
+    const tasks = await Task.find();
+    res.json(tasks)
+
 })
 
 app.listen(port)
