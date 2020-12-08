@@ -13,17 +13,21 @@ export default function ToDoTask(props) {
                 <h2 className="noteHeader">{props.title}</h2>
                 <hr/>
                 <h3 className="noteBody">{props.description}</h3>
-                <IconButton onClick={props.onProgress} style={{
-                    backgroundColor: "#222831",
-                    color: "#d1c145",
-                    marginRight: "8px"
-                }}>
+
+                <IconButton onClick={props.onProgress}
+                            style={{
+                                backgroundColor: "#222831",
+                                color: "#d1c145",
+                                marginRight: "8px"
+                            }}>
                     <ForwardIcon/>
                 </IconButton>
+
                 <IconButton onClick={props.onFinish}
                             style={{backgroundColor: "#222831", color: "#54e346", marginRight: "8px"}}>
                     <DoneIcon/>
                 </IconButton>
+
                 <IconButton onClick={props.onDelete}
                             style={{backgroundColor: "#222831", color: "#bb2205"}}>
                     <DeleteIcon/>

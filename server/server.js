@@ -85,7 +85,7 @@ app.post("/inProgressTask/:id", async (req, res) => {
 
 })
 
-app.post("/doneTask/:id", async (req, res) => {
+app.post("/finishedTask/:id", async (req, res) => {
     await Task.findByIdAndUpdate(req.params.id, {
         toDo: false,
         inProgress: false,
@@ -98,7 +98,7 @@ app.post("/doneTask/:id", async (req, res) => {
 
 })
 
-app.post("/deleteTask/:id", async (req, res) => {
+app.post("/deletedTask/:id", async (req, res) => {
     await Task.findByIdAndUpdate(req.params.id, {
         toDo: false,
         inProgress: false,
@@ -109,6 +109,17 @@ app.post("/deleteTask/:id", async (req, res) => {
     const tasks = await Task.find();
     res.json(tasks)
 
+})
+
+app.post("/returnTask/:id", async (req, res) => {
+    await Task.findByIdAndUpdate(req.params.id, {
+        toDo: true,
+        inProgress: false,
+        done: false,
+        deleted: false,
+    })
+    const tasks = await Task.find();
+    res.json(tasks)
 })
 
 app.listen(port)

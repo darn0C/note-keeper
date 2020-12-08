@@ -1,12 +1,16 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Grid from "@material-ui/core/Grid";
 import TextField from '@material-ui/core/TextField';
 import AddIcon from '@material-ui/icons/Add';
 import axios from "axios";
+import DeletedTask from "./notes/DeletedTask";
+import Typography from "@material-ui/core/Typography";
 
 export default function CreateMenu(props) {
+
+    const [tasks, setTasks] = useState([]);
 
     const [task, setTask] = useState({title: "", description: ""})
 
@@ -53,11 +57,27 @@ export default function CreateMenu(props) {
 
     }
 
+    useEffect(() => {
+        const fetchTasks = async () => {
+            const res = await axios.get("http://localhost:4000/", {
+                Headers: {
+                    "Access-Control-Allow-Origin": "*"
+                }
+            });
+            setTasks(res.data)
+        };
+        fetchTasks()
+    }, []);
+
+    const returnTask = async (id) => {
+        const res = await axios.post("http://localhost:4000/returnTask/" + id)
+        setTasks(res.data)
+    }
 
     return (
         <div>
             <h1>Create your note!</h1>
-            <IconButton onClick={props.MenuHandling}
+            <IconButton onClick={props.onMenuClose}
                         style={{
                             margin: "0 48px 0 0",
                             float: "right",
@@ -98,6 +118,34 @@ export default function CreateMenu(props) {
                         <AddIcon/>
                     </IconButton>
                 </form>
+            </Grid>
+            <hr/>
+            <Typography
+                style={{
+                    backgroundColor: "#222831",
+                    color: "#bb2205",
+                    width: "30vw",
+                    fontWeight: "700",
+                    margin: "0 auto"
+                }}
+                variant={"h2"}>DELETED</Typography>
+            <Grid
+                container
+                direction="row"
+                justify="space-evenly"
+                alignItems="flex-start"
+            >
+                {tasks.filter(item => item.deleted === true).map((taskItem, index) => {
+                    return (
+                        <DeletedTask
+                            key={index}
+                            id={taskItem._id}
+                            title={taskItem.title}
+                            description={taskItem.description}
+                            onReturn={() => returnTask(taskItem._id)}
+                        />
+                    )
+                })}
             </Grid>
         </div>
     )
