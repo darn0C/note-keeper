@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles.css"
 import IconButton from "@material-ui/core/IconButton";
 import CreateIcon from '@material-ui/icons/Create';
 

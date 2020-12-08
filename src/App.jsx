@@ -1,19 +1,27 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./styles.css";
+import axios from "axios";
 import Header from "./components/Header";
 import Grid from '@material-ui/core/Grid';
 import Table from "./components/Table";
-import Note from "./components/Note"
+import ToDoTask from "./components/notes/ToDoTask";
 import CreateMenu from "./components/CreateMenu";
 
 export default function App() {
 
-    const {notes, setNotes} = useState([]);
+    const [tasks, setTasks] = useState([]);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    function handleMenu () {
+    function handleMenu() {
         setIsMenuOpen(!isMenuOpen)
     }
+
+    useEffect(() => {
+        axios.get("http://localhost:4000/")
+            .then(function(res) {
+                setTasks(res.data)
+            })
+    })
 
     if (!isMenuOpen) {
         return (
@@ -23,7 +31,16 @@ export default function App() {
                     <Grid className="taskTable">
                         <Table tableName={"To - Do"} tableColor={"#14274e"} textColor={"#ebebeb"}/>
                         <h1>Todo</h1>
-                        <Note/>
+                        {tasks.filter(item => item.toDo === true).map((taskItem, index) => {
+                            return (
+                                <ToDoTask
+                                    key={index}
+                                    id={taskItem._id}
+                                    title={taskItem.title}
+                                    description={taskItem.description}
+                                />
+                            )
+                        })}
                     </Grid>
                     <Grid className="taskTable">
                         <Table tableName={"In Progress"} tableColor={"#d1c145"} textColor={"#222831"}/>

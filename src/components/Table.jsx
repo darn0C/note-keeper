@@ -1,5 +1,4 @@
 import React from "react";
-import "../styles.css";
 import Typography from '@material-ui/core/Typography';
 
 export default function Tables(props) {
