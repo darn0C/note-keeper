@@ -26,6 +26,10 @@ export default function CreateMenu(props) {
         })
     }
 
+    function handleSubmit () {
+
+    }
+
     return (
         <div>
             <h1>Create your note!</h1>
