@@ -28,7 +28,7 @@ Utiliza concurrently para ejecutar ambos scripts al mismo tiempo dando como resu
 
 ### Backend:
 
--Express
--Mongoose
--Axios
+- Express
+- Mongoose
+- Axios
 
