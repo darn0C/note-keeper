@@ -7,17 +7,9 @@ dando como resultado una aplicación intuitiva para la creación de notas, con p
 
 En el directorio del proyecto puedes utilizar:
 
-### `npm run start`
+### `npm start`
 
 Ejecuta los scripts de React generando el frontend.
-
-### `npm run server`
-
-Ejecuta los scripts del backend haciendo funcionar el API.
-
-### `npm run dev`
-
-Utiliza concurrently para ejecutar ambos scripts al mismo tiempo dando como resultado la aplicación funcional. 
 
 ## Tecnologías
 
@@ -25,10 +17,4 @@ Utiliza concurrently para ejecutar ambos scripts al mismo tiempo dando como resu
 
 - React
 - Material-UI
-
-### Backend:
-
-- Express
-- Mongoose
-- Axios
 
