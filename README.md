@@ -17,4 +17,7 @@ Ejecuta los scripts de React generando el frontend.
 
 - React
 - Material-UI
+- Material-UI Icons
+- Javascript
+- CSS
 
