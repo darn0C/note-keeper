@@ -2,6 +2,7 @@ import React from "react";
 import Paper from '@material-ui/core/Paper';
 import IconButton from "@material-ui/core/IconButton";
 import KeyboardReturnIcon from '@material-ui/icons/KeyboardReturn';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 export default function DeletedTask(props) {
     return (
@@ -12,8 +13,12 @@ export default function DeletedTask(props) {
                 <h3 className="noteBody">{props.description}</h3>
 
                 <IconButton onClick={props.onReturn}
-                            style={{backgroundColor: "#222831", color: "#0e49b5"}}>
+                            style={{backgroundColor: "#222831", color: "#0e49b5", marginRight: "8px"}}>
                     <KeyboardReturnIcon/>
+                </IconButton>
+                <IconButton onClick={props.onKill}
+                            style={{backgroundColor: "#222831", color: "#f8f1f1"}}>
+                    <CancelIcon/>
                 </IconButton>
 
             </Paper>

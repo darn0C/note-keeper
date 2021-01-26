@@ -14,7 +14,7 @@ export default function TaskMenu(props) {
 
     useEffect(() => {
         const fetchTasks = async () => {
-            const res = await axios.get("http://localhost:4000/", {
+            const res = await axios.get("https://note-keeper-api-darnoc.herokuapp.com/", {
                 Headers: {
                     "Access-Control-Allow-Origin": "*"
                 }
@@ -25,17 +25,17 @@ export default function TaskMenu(props) {
     }, []);
 
     const taskInProgress = async (id) => {
-        const res = await axios.post("http://localhost:4000/inProgressTask/" + id)
+        const res = await axios.post("https://note-keeper-api-darnoc.herokuapp.com/inProgressTask/" + id)
         setTasks(res.data)
     }
 
     const taskFinished = async (id) => {
-        const res = await axios.post("http://localhost:4000/finishedTask/" + id)
+        const res = await axios.post("https://note-keeper-api-darnoc.herokuapp.com/finishedTask/" + id)
         setTasks(res.data)
     }
 
     const taskDeleted = async (id) => {
-        const res = await axios.post("http://localhost:4000/deletedTask/" + id)
+        const res = await axios.post("https://note-keeper-api-darnoc.herokuapp.com/deletedTask/" + id)
         setTasks(res.data)
     }
 

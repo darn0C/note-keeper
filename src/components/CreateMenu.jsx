@@ -42,7 +42,7 @@ export default function CreateMenu(props) {
             description: task.description
         }
 
-        axios.post("http://localhost:4000/new", data)
+        axios.post("https://note-keeper-api-darnoc.herokuapp.com/new", data)
             .then(function (res) {
                 console.log(res)
             })
@@ -59,7 +59,7 @@ export default function CreateMenu(props) {
 
     useEffect(() => {
         const fetchTasks = async () => {
-            const res = await axios.get("http://localhost:4000/", {
+            const res = await axios.get("https://note-keeper-api-darnoc.herokuapp.com/", {
                 Headers: {
                     "Access-Control-Allow-Origin": "*"
                 }
@@ -70,7 +70,12 @@ export default function CreateMenu(props) {
     }, []);
 
     const returnTask = async (id) => {
-        const res = await axios.post("http://localhost:4000/returnTask/" + id)
+        const res = await axios.post("https://note-keeper-api-darnoc.herokuapp.com/returnTask/" + id)
+        setTasks(res.data)
+    }
+
+    const killTask = async (id) => {
+        const res = await axios.post("https://note-keeper-api-darnoc.herokuapp.com/killTask/" + id)
         setTasks(res.data)
     }
 
@@ -143,6 +148,7 @@ export default function CreateMenu(props) {
                             title={taskItem.title}
                             description={taskItem.description}
                             onReturn={() => returnTask(taskItem._id)}
+                            onKill={() => killTask(taskItem._id)}
                         />
                     )
                 })}
